@@ -1,0 +1,45 @@
+#include <iostream>
+#include <stdio.h>
+#include <cstring>
+
+void ordoneaza(char* cuvinte[], int cate)
+{
+	int nr[50];
+	char* aux;
+	int auxx;
+	for (int i = 0; i < cate; i++)
+		nr[i] = strlen(cuvinte[i]);
+	bool ok = false;
+	do
+	{
+		ok = true;
+		for(int i=0;i<cate-1;i++)
+			if (nr[i] < nr[i + 1])
+			{
+				auxx=nr[i];
+				nr[i] = nr[i + 1];
+				nr[i + 1] = auxx;
+				aux = cuvinte[i];
+				cuvinte[i] = cuvinte[i + 1];
+				cuvinte[i + 1] = aux;
+				ok = false;
+			}
+	} while (ok == false);
+}
+int main()
+{
+	char *cuvinte[50];
+	char fraza[250];
+	int cate = 0;
+	scanf("% [^ \n] % *c", fraza);
+	char* cuvant = strtok(fraza, " ");
+	while (cuvant != NULL)
+	{
+		cuvinte[cate++] = cuvant;
+		cuvant = strtok(NULL, " ");
+	}
+	ordoneaza(cuvinte, cate);
+	for (int i = 0; i < cate; i++)
+		printf("%\n", cuvinte[i]);
+	return 0;
+}

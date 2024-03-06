@@ -1,0 +1,39 @@
+// OOPlab1.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//
+
+#include <iostream>
+#include <stdio.h>
+#include <cstring>
+
+int ConvertToInt(char nr[])
+{
+	int dim = strlen (nr);
+	int pow = 1;
+	int number = 0;
+	for (int i = dim - 1; i >= 0; i--)
+	{
+		number = number + pow * (nr[i] - '0');
+		pow = pow * 10;
+	}
+	return number;
+}
+int main()
+{
+	char line[100];
+	int suma = 0;
+	FILE* fp;
+	if (fopen_s(&fp, "in.txt", "r") != 0)
+	{
+		printf("Eroare. Nu am putut deschide fisierul\n");
+	}
+	else 
+		{
+			while (fgets(line, sizeof(line), fp))
+			{
+				suma = suma + ConvertToInt(line);
+			}
+		}
+	fclose(fp);
+	printf("Suma: %d\n", suma);
+	return 0;
+}
